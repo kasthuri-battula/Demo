@@ -64,25 +64,25 @@ import sys
 try:
     import dask
     import dask.dataframe as dd
-    print(f"  ✅  Dask {dask.__version__} — OK")
+    print(f"    Dask {dask.__version__} — OK")
 except ImportError as e:
-    print(f"  ❌  Dask import failed: {e}")
+    print(f"    Dask import failed: {e}")
     sys.exit(1)
 
 # Verify Ray
 try:
     import ray
-    print(f"  ✅  Ray  {ray.__version__} — OK")
+    print(f"    Ray  {ray.__version__} — OK")
 except ImportError as e:
-    print(f"  ❌  Ray import failed: {e}")
+    print(f"    Ray import failed: {e}")
     sys.exit(1)
 
 # Verify PyYAML (for schema files)
 try:
     import yaml
-    print(f"  ✅  PyYAML — OK")
+    print(f"    PyYAML — OK")
 except ImportError as e:
-    print(f"  ❌  PyYAML import failed: {e}")
+    print(f"    PyYAML import failed: {e}")
     sys.exit(1)
 
 print()
@@ -92,7 +92,7 @@ EOF
 # ---- Done ----
 echo ""
 echo "=================================================="
-echo "  ✅  Setup complete!"
+echo "    Setup complete!"
 echo ""
 echo "  To activate the environment in a new terminal:"
 echo "    source .venv/bin/activate"
