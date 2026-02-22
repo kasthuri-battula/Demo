@@ -1,0 +1,16 @@
+# ---- Distributed Computing ----
+dask[complete]>=2024.1.0        # Parallel dataframe & task processing
+ray[default]>=2.9.0             # Distributed actor-based parallelism
+
+# ---- Data Handling ----
+pandas>=2.1.0                   # Dataframe operations (used by Dask)
+numpy>=1.26.0                   # Numerical operations
+pyarrow>=14.0.0                 # Fast columnar storage (Parquet support)
+pyyaml>=6.0.1                   # Parse YAML schema files
+
+# ---- Testing ----
+pytest>=7.4.0                   # Test framework
+pytest-timeout>=2.2.0           # Prevent hanging tests
+
+# ---- Utilities ----
+python-dateutil>=2.8.2          # Timestamp parsing

@@ -1,0 +1,136 @@
+# =============================================================
+# Anomaly Schema - Defines the "problems" the system detects
+# =============================================================
+
+anomaly_schema:
+  description: >
+    An anomaly is an automatically detected pattern in the logs
+    that signals something is wrong or about to go wrong.
+
+  fields:
+    - name: anomaly_id
+      type: string
+      required: yes
+      example: "anom_20240213_001"
+      notes: "Unique ID for this detected anomaly event"
+
+    - name: name
+      type: string
+      required: yes
+      example: "error_spike"
+      notes: "Short machine-friendly identifier for the anomaly type"
+
+    - name: description
+      type: string
+      required: yes
+      example: "Too many errors occurred in a short time window"
+
+    - name: severity
+      type: string
+      required: yes
+      options: [LOW, MEDIUM, HIGH, CRITICAL]
+      example: "HIGH"
+      notes: "How urgently a human needs to respond"
+
+    - name: how_to_detect
+      type: string
+      required: yes
+      example: "If errors > 100 in 5 minutes"
+      notes: "Plain-English detection rule; code implements this logic"
+
+    - name: affected_service
+      type: string
+      required: yes
+      example: "payment-service"
+
+    - name: detected_at
+      type: string
+      format: "ISO 8601"
+      required: yes
+      example: "2024-02-13 14:25:00"
+
+    - name: window_start
+      type: string
+      required: no
+      example: "2024-02-13 14:20:00"
+      notes: "Beginning of the time window that triggered detection"
+
+    - name: window_end
+      type: string
+      required: no
+      example: "2024-02-13 14:25:00"
+
+    - name: trigger_value
+      type: number
+      required: no
+      example: 147
+      notes: "The actual metric value that crossed the threshold"
+
+    - name: threshold_value
+      type: number
+      required: no
+      example: 100
+      notes: "The limit that was exceeded"
+
+    - name: related_trace_ids
+      type: list
+      required: no
+      example: ["tr_003ccc", "tr_003ddd"]
+      notes: "Trace IDs of the log entries that caused this anomaly"
+
+    - name: resolved
+      type: boolean
+      required: yes
+      example: false
+      notes: "True once the anomaly is no longer active"
+
+# =============================================================
+# 5 Anomaly Types
+# =============================================================
+
+anomalies:
+  - name: error_spike
+    description: "Too many errors in a short time window"
+    severity: HIGH
+    how_to_detect: "If ERROR-level logs > 100 in any 5-minute window"
+    example_trigger:
+      trigger_value: 147
+      threshold_value: 100
+      window_minutes: 5
+
+  - name: slow_response
+    description: "Service response times exceed acceptable latency"
+    severity: MEDIUM
+    how_to_detect: "If average duration_ms > 2000 over a 10-minute window"
+    example_trigger:
+      trigger_value: 3400
+      threshold_value: 2000
+      window_minutes: 10
+
+  - name: service_silence
+    description: "A service has stopped emitting logs entirely"
+    severity: CRITICAL
+    how_to_detect: "If no logs received from a known service for > 5 minutes"
+    example_trigger:
+      trigger_value: 0
+      threshold_value: 1
+      window_minutes: 5
+      notes: "Zero logs when at least 1 expected = silent crash"
+
+  - name: repeated_auth_failure
+    description: "Multiple failed login attempts from the same user or IP"
+    severity: HIGH
+    how_to_detect: "If auth-service logs WARNING/ERROR > 20 times for same user_id in 1 minute"
+    example_trigger:
+      trigger_value: 38
+      threshold_value: 20
+      window_minutes: 1
+
+  - name: memory_warning_flood
+    description: "Sustained stream of WARNING logs suggesting resource exhaustion"
+    severity: MEDIUM
+    how_to_detect: "If WARNING logs from a single service > 200 in 15 minutes"
+    example_trigger:
+      trigger_value: 251
+      threshold_value: 200
+      window_minutes: 15

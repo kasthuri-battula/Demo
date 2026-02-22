@@ -1,0 +1,114 @@
+# =============================================================
+# Log Schema - Defines the structure of every log entry
+# =============================================================
+
+log_entry:
+  description: "A single log entry emitted by any service in the system"
+
+  fields:
+    - name: timestamp
+      type: string
+      format: "ISO 8601 (YYYY-MM-DD HH:MM:SS)"
+      required: yes
+      example: "2024-02-13 14:23:45"
+      notes: "UTC timezone always"
+
+    - name: level
+      type: string
+      required: yes
+      options: [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+      example: "ERROR"
+      notes: "Use CRITICAL for system-threatening events"
+
+    - name: service
+      type: string
+      required: yes
+      example: "payment-service"
+      notes: "Unique name for the application/microservice emitting this log"
+
+    - name: message
+      type: string
+      required: yes
+      example: "Payment transaction failed for order #9821"
+      notes: "Human-readable description of the event"
+
+    - name: trace_id
+      type: string
+      required: no
+      example: "abc123def456"
+      notes: "Links logs from the same request across multiple services"
+
+    - name: host
+      type: string
+      required: no
+      example: "prod-server-07"
+      notes: "Machine or container that produced the log"
+
+    - name: user_id
+      type: string
+      required: no
+      example: "user_8842"
+      notes: "ID of the user whose action triggered the log (if applicable)"
+
+    - name: duration_ms
+      type: integer
+      required: no
+      example: 340
+      notes: "Time in milliseconds the operation took (for performance logs)"
+
+    - name: metadata
+      type: object
+      required: no
+      example: { "order_id": "9821", "amount": 59.99, "currency": "USD" }
+      notes: "Freeform key-value pairs for additional context"
+
+# =============================================================
+# 3 Example Log Entries
+# =============================================================
+
+examples:
+  - description: "INFO log – normal successful operation"
+    entry:
+      timestamp: "2024-02-13 09:01:00"
+      level: "INFO"
+      service: "auth-service"
+      message: "User login successful"
+      trace_id: "tr_001aaa"
+      host: "prod-server-01"
+      user_id: "user_4421"
+      duration_ms: 112
+      metadata:
+        ip_address: "192.168.1.10"
+        login_method: "oauth2"
+
+  - description: "WARNING log – degraded but not broken"
+    entry:
+      timestamp: "2024-02-13 11:47:33"
+      level: "WARNING"
+      service: "inventory-service"
+      message: "Stock level critically low for SKU-8823"
+      trace_id: "tr_002bbb"
+      host: "prod-server-04"
+      user_id: null
+      duration_ms: null
+      metadata:
+        sku: "SKU-8823"
+        remaining_units: 3
+        reorder_threshold: 10
+
+  - description: "ERROR log – something broke and needs attention"
+    entry:
+      timestamp: "2024-02-13 14:23:45"
+      level: "ERROR"
+      service: "payment-service"
+      message: "Payment transaction failed for order #9821"
+      trace_id: "tr_003ccc"
+      host: "prod-server-02"
+      user_id: "user_8842"
+      duration_ms: 8021
+      metadata:
+        order_id: "9821"
+        amount: 59.99
+        currency: "USD"
+        error_code: "GATEWAY_TIMEOUT"
+        retry_attempt: 3
