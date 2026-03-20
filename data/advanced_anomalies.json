@@ -1,0 +1,143 @@
+[
+  {
+    "anomaly_id": "stat_roc_auth-service_2026-03-19 20:20:00_1773933732.061881",
+    "name": "sudden_error_increase",
+    "method": "rate_of_change",
+    "description": "Error count increased by 226% from previous window",
+    "severity": "HIGH",
+    "service": "auth-service",
+    "window": "2026-03-19 20:20:00",
+    "detected_at": "2026-03-19T20:52:12.061881",
+    "trigger_value": 124,
+    "threshold_value": "200.0% increase",
+    "percent_change": 226.3157894736842,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "stat_roc_inventory-service_2026-03-19 20:20:00_1773933732.065394",
+    "name": "sudden_error_increase",
+    "method": "rate_of_change",
+    "description": "Error count increased by 324% from previous window",
+    "severity": "HIGH",
+    "service": "inventory-service",
+    "window": "2026-03-19 20:20:00",
+    "detected_at": "2026-03-19T20:52:12.065394",
+    "trigger_value": 123,
+    "threshold_value": "200.0% increase",
+    "percent_change": 324.13793103448273,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "stat_roc_payment-service_2026-03-19 20:20:00_1773933732.07439",
+    "name": "sudden_error_increase",
+    "method": "rate_of_change",
+    "description": "Error count increased by 370% from previous window",
+    "severity": "HIGH",
+    "service": "payment-service",
+    "window": "2026-03-19 20:20:00",
+    "detected_at": "2026-03-19T20:52:12.074390",
+    "trigger_value": 127,
+    "threshold_value": "200.0% increase",
+    "percent_change": 370.3703703703703,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "stat_roc_user-service_2026-03-19 20:20:00_1773933732.079933",
+    "name": "sudden_error_increase",
+    "method": "rate_of_change",
+    "description": "Error count increased by 455% from previous window",
+    "severity": "HIGH",
+    "service": "user-service",
+    "window": "2026-03-19 20:20:00",
+    "detected_at": "2026-03-19T20:52:12.079933",
+    "trigger_value": 122,
+    "threshold_value": "200.0% increase",
+    "percent_change": 454.54545454545456,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "ml_iso_inventory-service_2026-03-19 20:50:00_1773933732.163381",
+    "name": "ml_detected_anomaly",
+    "method": "isolation_forest",
+    "description": "ML model detected unusual pattern in metrics",
+    "severity": "MEDIUM",
+    "service": "inventory-service",
+    "window": "2026-03-19 20:50:00",
+    "detected_at": "2026-03-19T20:52:12.163381",
+    "trigger_value": {
+      "error_count": 10,
+      "warning_count": 29,
+      "avg_duration_ms": 588.7131782945736
+    },
+    "anomaly_score": -0.6812860780853622,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "ml_iso_notification-service_2026-03-19 20:50:00_1773933732.163381",
+    "name": "ml_detected_anomaly",
+    "method": "isolation_forest",
+    "description": "ML model detected unusual pattern in metrics",
+    "severity": "MEDIUM",
+    "service": "notification-service",
+    "window": "2026-03-19 20:50:00",
+    "detected_at": "2026-03-19T20:52:12.163381",
+    "trigger_value": {
+      "error_count": 17,
+      "warning_count": 23,
+      "avg_duration_ms": 811.8076923076923
+    },
+    "anomaly_score": -0.565887821589051,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "ml_iso_payment-service_2026-03-19 20:25:00_1773933732.163381",
+    "name": "ml_detected_anomaly",
+    "method": "isolation_forest",
+    "description": "ML model detected unusual pattern in metrics",
+    "severity": "MEDIUM",
+    "service": "payment-service",
+    "window": "2026-03-19 20:25:00",
+    "detected_at": "2026-03-19T20:52:12.163381",
+    "trigger_value": {
+      "error_count": 82,
+      "warning_count": 58,
+      "avg_duration_ms": 1056.0839002267574
+    },
+    "anomaly_score": -0.5535000235114126,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "ml_iso_payment-service_2026-03-19 20:50:00_1773933732.163381",
+    "name": "ml_detected_anomaly",
+    "method": "isolation_forest",
+    "description": "ML model detected unusual pattern in metrics",
+    "severity": "MEDIUM",
+    "service": "payment-service",
+    "window": "2026-03-19 20:50:00",
+    "detected_at": "2026-03-19T20:52:12.163381",
+    "trigger_value": {
+      "error_count": 7,
+      "warning_count": 28,
+      "avg_duration_ms": 487.84137931034485
+    },
+    "anomaly_score": -0.5643095728122884,
+    "resolved": false
+  },
+  {
+    "anomaly_id": "ml_iso_user-service_2026-03-19 20:50:00_1773933732.163381",
+    "name": "ml_detected_anomaly",
+    "method": "isolation_forest",
+    "description": "ML model detected unusual pattern in metrics",
+    "severity": "MEDIUM",
+    "service": "user-service",
+    "window": "2026-03-19 20:50:00",
+    "detected_at": "2026-03-19T20:52:12.163381",
+    "trigger_value": {
+      "error_count": 15,
+      "warning_count": 23,
+      "avg_duration_ms": 635.0074626865671
+    },
+    "anomaly_score": -0.5820564546477519,
+    "resolved": false
+  }
+]
